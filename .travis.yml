@@ -7,5 +7,10 @@ branches:
     - develop
 script:
   - npm run test:coveralls
+deploy:
+  provider: heroku
+  api_key: 759e2259-6ed8-413b-86d7-9122e01dc383
+  app:
+    develop: my-banka-api
 notifications:
   emails: false

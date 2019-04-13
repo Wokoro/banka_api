@@ -35,16 +35,24 @@ module.exports = {
     return jwt.sign(payload, privateKey, signOptions);
   },
   verifyToken(req, res, next) {
-    const token = req.headers.authorization.split(' ')[1];
-    const issureToken = jwt.verify(token, publicKey, verifyOptions);
-    if (issureToken) {
-      req.token = issureToken;
-      next();
-    } else {
+    const tokenAuth = req.headers.authorization;
+    if (typeof tokenAuth === 'undefined') {
       res.json({
-        status: 401,
-        message: 'Invalid token',
+        status: 500,
+        message: 'Access Denied, Authorization token required',
       });
+    } else {
+      const token = req.headers.authorization.split(' ')[1] || false;
+      const issureToken = jwt.verify(token, publicKey, verifyOptions);
+      if (issureToken) {
+        req.token = issureToken;
+        next();
+      } else {
+        res.json({
+          status: 401,
+          message: 'Invalid token',
+        });
+      }
     }
   },
   hashPassword(password) {
