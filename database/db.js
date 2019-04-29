@@ -6,14 +6,15 @@ import pg from 'pg';
 
 config();
 const configDB = {
-  user: process.env.DB_USER,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  max: process.env.DB_MAX,
-  idleTimeoutMillis: process.env.DB_IDLETIMEOUTMILLIS,
+  // user: process.env.DB_USER,
+  // database: process.env.DB_NAME,
+  // password: process.env.DB_PASSWORD,
+  // max: process.env.DB_MAX,
+  // idleTimeoutMillis: process.env.DB_IDLETIMEOUTMILLIS,
+
 };
 
-const pool = new pg.Pool(configDB);
+const pool = new pg.Pool(process.env.DATABASE_URL);
 
 const client = pool;
 

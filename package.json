@@ -2,18 +2,17 @@
   "name": "banka_api",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "clean": "rm -rf build && mkdir build",
-    "build-server": "babel -d ./build ./server -s",
+    "build-server": "babel -d ./build ./index -s",
     "test": "npm run testmigrate && nyc mocha --timeout 600000 -r @babel/register  tests/index.js --exit",
-    "build": "npm run clean && npm run build-server",
-    "start-dev": "nodemon --exec babel-node ./server/server.js",
+    "start": "babel-node index.js",
+    "start-dev": "nodemon --exec babel-node index.js",
     "lint": "eslint **/*.js",
-    "start": "babel-node server.js",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "coverage": "nyc --reporter=text-lcov --reporter=text-summary npm test",
-    "testmigrate": "babel-node ./server/database/migrate.js"
+    "testmigrate": "babel-node database/migrate.js"
   },
   "author": "Wokoro Douye Samuel",
   "license": "ISC",
@@ -54,5 +53,10 @@
   },
   "engines": {
     "node": "10.15.3"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "data/*.json"
+    ]
   }
 }

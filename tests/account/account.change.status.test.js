@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import server from '../../server/server';
+import server from '../index';
 
 const { expect } = chai;
 chai.use(chaiHttp);
