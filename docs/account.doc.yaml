@@ -1,14 +1,3 @@
-swagger: "2.0"
-
-info:
-  version: 1.0.0
-  title: BANKA API
-  description: API to power front-end client like the banka front-end ui
-
-schemes:
-  - https
-basePath: /api/v1
-
 paths:
   /accounts:
     post:

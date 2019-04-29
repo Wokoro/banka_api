@@ -5,7 +5,6 @@ import authAdmin from '../../utils/auth.staff';
 import { passToken } from '../../utils/utils';
 import { validateAccountCreationFields, accountNumberValidation } from '../../middleware/account.validations';
 import authUser from '../../utils/auth.user';
-import EmailAuthentication from '../../middleware/authenticate.mail.presence';
 import UserRestricter from '../../middleware/restric.user';
 import authValidUsers from '../../middleware/account.view.authentication';
 

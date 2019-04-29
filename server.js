@@ -5,8 +5,8 @@
 import 'dotenv/config';
 import express from 'express';
 import bodyParser from 'body-parser';
+import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
-import swaggerSpec from '../swagger.config';
 
 import { initDBPool } from './database/db';
 
@@ -16,7 +16,32 @@ import TransactionRoutes from './src/routers/transaction.routes';
 
 const app = express();
 
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+const swaggerDefinition = {
+  info: {
+    title: 'Banka Swagger API',
+    version: '1.0.0',
+    description: 'Documentation for the Banka App',
+  },
+  securityDefinitions: {
+    bearerAuth: {
+      type: 'apiKey',
+      name: 'Authorization',
+      scheme: 'bearer',
+      in: 'header',
+    },
+  },
+};
+
+const options = {
+  swaggerDefinition,
+  apis: ['./docs/*.yaml'],
+};
+
+const swaggerData = swaggerJSDoc(options);
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerData));
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
